@@ -1,0 +1,2 @@
+- Communicates project structure and design requirements visually via screenshots or images rather than text descriptions. Confidence: 0.7
+- Prefers to provide information (e.g., URLs, long strings) via files rather than pasting text directly in chat. Confidence: 0.8
