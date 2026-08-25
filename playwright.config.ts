@@ -46,6 +46,7 @@ export default defineConfig({
   ],
 
   use: {
+    headless: false, // Headed mode → browser window is visible
     baseURL: resolveBaseURL(),
     screenshot: 'only-on-failure',
     video: 'on',
