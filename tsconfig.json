@@ -20,6 +20,9 @@
       "@utils/*": ["src/utils/*"]
     }
   },
+  "paths": {
+  "@testdata/*": ["src/testdata/*"]
+},
   "include": ["src", "playwright.config.ts"],
   "exclude": ["node_modules"]
 }

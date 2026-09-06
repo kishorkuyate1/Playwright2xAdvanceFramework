@@ -58,3 +58,5 @@ export abstract class BasePage {
 //
 // Main purpose:
 // Write common code once → Reuse it in all Page Objects.
+
+

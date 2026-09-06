@@ -26,9 +26,14 @@ function resolveBaseURL(): string {
 
 }
 
-
+console.log('======================================');
+console.log('BASE_URL:', process.env.BASE_URL);
+console.log('TTA_ENV:', process.env.TTA_ENV);
+console.log('QA_BASE_URL:', process.env.QA_BASE_URL);
+console.log('RESOLVED BASE URL:', resolveBaseURL());
+console.log('======================================');
 export default defineConfig({
-  testDir: './src/tests',
+  testDir: './src',
 
   timeout: 60_000,
 
