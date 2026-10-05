@@ -6,14 +6,14 @@
  * centralises all random data so tests stay deterministic-friendly (one
  * import) and read naturally.
  *
- * Faker v8 API notes (project is CommonJS, so we pin the dual CJS/ESM v8):
- *   - `faker.internet.userName()`        (lowercase `username()` is v9+ only)
- *   - `faker.internet.password({length})` (v8 options-object form; avoids the
- *      deprecated positional overload)
- *   - `faker.location.zipCode()`         (v8 renamed `address` -> `location`)
+ * Faker API notes:
+ *   - `faker.internet.username()`
+ *   - `faker.internet.password({ length })`
+ *   - `faker.location.zipCode()`
  */
 
 import { faker } from '@faker-js/faker';
+import { envOr } from '@config/env';
 
 export interface Credentials {
     username: string;
@@ -78,6 +78,37 @@ export class DataGenerator {
         return faker.location.zipCode();
     }
 
+    // ---------- primitives ----------
+
+    /** Whole number in an inclusive range, e.g. a price or a quantity. */
+    static number(min: number, max: number): number {
+        return faker.number.int({ min, max });
+    }
+
+    /** Random true/false, for flags such as depositpaid. */
+    static bool(): boolean {
+        return faker.datatype.boolean();
+    }
+
+    /**
+     * Date as `YYYY-MM-DD`, offset from a reference date.
+     * Pass a negative offset for the past. `from` defaults to today, so
+     * generated dates move with the calendar instead of ageing into the past.
+     */
+    static dateOffset(days: number, from: Date = new Date()): string {
+        const d = new Date(from);
+        d.setUTCDate(d.getUTCDate() + days);
+        return d.toISOString().slice(0, 10);
+    }
+
+    /** Pick one item from a list. Throws on an empty list rather than returning undefined. */
+    static oneOf<T>(items: readonly T[]): T {
+        if (items.length === 0) {
+            throw new Error('[DataGenerator] oneOf() needs a non-empty list');
+        }
+        return faker.helpers.arrayElement(items);
+    }
+
     // ---------- composites ----------
 
     /** Customer info for the TTACart checkout step-one form. */
@@ -86,6 +117,16 @@ export class DataGenerator {
             firstName: DataGenerator.firstName(),
             lastName: DataGenerator.lastName(),
             postalCode: DataGenerator.postalCode(),
+        };
+    }
+
+    /** Checkout customer, `.env` first, Faker for any field left unset. */
+    static checkoutCustomerFromEnv(): CheckoutCustomer {
+        const generated = DataGenerator.checkoutCustomer();
+        return {
+            firstName: envOr('CHECKOUT_FIRST_NAME', generated.firstName),
+            lastName: envOr('CHECKOUT_LAST_NAME', generated.lastName),
+            postalCode: envOr('CHECKOUT_POSTAL_CODE', generated.postalCode),
         };
     }
 

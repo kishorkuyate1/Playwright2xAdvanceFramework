@@ -1,2 +1,6 @@
-- Communicates project structure and design requirements visually via screenshots or images rather than text descriptions. Confidence: 0.7
+- Wants tests executed and the root cause explained with actionable fixes, not just raw test output. Confidence: 0.8
+- Wants code committed and pushed to a GitHub remote repository when changes are made (uses `git push origin master`). Confidence: 0.6
+- Organizes test suites and spec files with numbered prefixes (e.g., `01_BasicPing.spec.ts`, `01_RestfullBooker_Raw/`) for ordered grouping and sequencing. Confidence: 0.6- Communicates project structure and design requirements visually via screenshots or images rather than text descriptions. Confidence: 0.7
 - Prefers to provide information (e.g., URLs, long strings) via files rather than pasting text directly in chat. Confidence: 0.8
+- Uses Playwright with TypeScript and a Page Object Model pattern (BasePage, LoginPage, InventoryPage) for e2e testing. Confidence: 0.8
+- Wants tests executed and the root cause explained with actionable fixes, not just raw test output. Confidence: 0.8

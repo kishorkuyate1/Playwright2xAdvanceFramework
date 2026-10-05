@@ -75,10 +75,4 @@ test.describe('@P0 @Regression E2E @Checkout Checkout Feature', () => {
             await checkoutCompletePage.assertOrderComplete();
         });
     });
-
-
-
-
-
-
 });

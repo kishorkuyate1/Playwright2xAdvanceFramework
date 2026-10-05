@@ -14,7 +14,6 @@ import { CheckoutCompletePage } from '@pages/CheckoutCompletePage';
 // Imports login test data from the JSON file.
 import loginTestData from '@testdata/logintestdata.json';
 
-
 // Defines the structure of one login record from the JSON file.
 // Each user must have a username and password.
 type LoginRecord = {
@@ -47,8 +46,6 @@ const SELECTED_ITEM_ID = 'test-allthethings-tshirt-red';
 if (!validUser) {
     throw new Error('Required standard_user test data is missing');
 }
-
-
 // Defines all custom fixtures that our tests can use.
 //
 // After this type is defined, tests can request fixtures such as:
